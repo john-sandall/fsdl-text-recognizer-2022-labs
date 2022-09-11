@@ -55,7 +55,10 @@ def _setup_parser():
         "--stop_early",
         type=int,
         default=0,
-        help="If non-zero, applies early stopping, with the provided value as the 'patience' argument."
+        help=(
+            "If non-zero, applies early stopping, "
+            "with the provided value as the 'patience' argument."
+        )
         + " Default is 0.",
     )
 
@@ -90,7 +93,9 @@ def main():
 
     Sample command:
     ```
-    python training/run_experiment.py --max_epochs=3 --gpus='0,' --num_workers=20 --model_class=MLP --data_class=MNIST
+    python training/run_experiment.py \
+        --max_epochs=3 --gpus='0,' --num_workers=20 \
+        --model_class=MLP --data_class=MNIST
     ```
 
     For basic help documentation, run the command
@@ -98,12 +103,14 @@ def main():
     python training/run_experiment.py --help
     ```
 
-    The available command line args differ depending on some of the arguments, including --model_class and --data_class.
+    The available command line args differ depending on some of the arguments,
+    including --model_class and --data_class.
 
-    To see which command line args are available and read their documentation, provide values for those arguments
-    before invoking --help, like so:
+    To see which command line args are available and read their documentation,
+    provide values for those arguments before invoking --help, like so:
     ```
     python training/run_experiment.py --model_class=MLP --data_class=MNIST --help
+    ```
     """
     parser = _setup_parser()
     args = parser.parse_args()
