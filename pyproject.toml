@@ -175,6 +175,8 @@ disable = [
 	"too-few-public-methods",
 	"too-many-ancestors",
 	"too-many-instance-attributes",
+	# Disabled due to pylint bugs
+	"import-self", # https://github.com/PyCQA/pylint/issues/3933
 	# TODO: Investigate whether these should be disabled
 	"E1101",
 	"R1732",

@@ -31,7 +31,8 @@ class MNIST(BaseDataModule):
         """Split into train, val, test, and set dims."""
         mnist_full = TorchMNIST(self.data_dir, train=True, transform=self.transform)
         self.data_train, self.data_val = random_split(  # type: ignore
-            mnist_full, [metadata.TRAIN_SIZE, metadata.VAL_SIZE]
+            mnist_full,
+            [metadata.TRAIN_SIZE, metadata.VAL_SIZE],
         )
         self.data_test = TorchMNIST(self.data_dir, train=False, transform=self.transform)
 

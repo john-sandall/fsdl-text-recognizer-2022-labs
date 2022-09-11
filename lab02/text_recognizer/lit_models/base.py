@@ -81,7 +81,7 @@ class BaseLitModel(pl.LightningModule):
         return torch.argmax(logits, dim=1)
 
     def training_step(self, batch, batch_idx):
-        x, y, logits, loss = self._run_on_batch(batch)
+        x, y, logits, loss = self._run_on_batch(batch)  # pylint: disable=unused-variable
         self.train_acc(logits, y)
 
         self.log("train/loss", loss)
@@ -99,7 +99,7 @@ class BaseLitModel(pl.LightningModule):
         return x, y, logits, loss
 
     def validation_step(self, batch, batch_idx):
-        x, y, logits, loss = self._run_on_batch(batch)
+        x, y, logits, loss = self._run_on_batch(batch)  # pylint: disable=unused-variable
         self.val_acc(logits, y)
 
         self.log("validation/loss", loss, prog_bar=True, sync_dist=True)
@@ -110,7 +110,7 @@ class BaseLitModel(pl.LightningModule):
         return outputs
 
     def test_step(self, batch, batch_idx):
-        x, y, logits, loss = self._run_on_batch(batch)
+        x, y, logits, loss = self._run_on_batch(batch)  # pylint: disable=unused-variable
         self.test_acc(logits, y)
 
         self.log("test/loss", loss, on_step=False, on_epoch=True)
