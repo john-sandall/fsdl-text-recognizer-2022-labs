@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 from collections import defaultdict
-from typing import Sequence
+from collections.abc import Sequence
 
 import h5py
 import numpy as np

@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import argparse
 import math
-from typing import Any, Tuple, Union
+from typing import Any, Union
 
 import torch
 import torch.nn.functional as F
 from torch import nn
 
 # Common type hints
-Param2D = Union[int, Tuple[int, int]]
+Param2D = Union[int, tuple[int, int]]
 
 CONV_DIM = 32
 FC_DIM = 512

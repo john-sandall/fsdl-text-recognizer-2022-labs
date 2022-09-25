@@ -49,7 +49,7 @@ repos:
     hooks:
       - &flake8
         id: flake8
-        exclude: (lab02|lab03|lab04|lab06|lab07|lab08)
+        exclude: (lab03|lab04|lab06|lab07|lab08)
         additional_dependencies:
           - flake8-annotations
           - flake8-bandit
@@ -87,7 +87,7 @@ repos:
     hooks:
       - id: pyupgrade
         args:
-          - "--py37-plus"
+          - "--py310-plus"
   # shellcheck-py for linting shell files
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.8.0.4
@@ -115,7 +115,8 @@ repos:
           (?x)^(
               poetry\.lock|
               \.secrets\.baseline|
-              \.env\.template
+              \.env\.template|
+              .*\.ipynb
           )$
   # - repo: https://github.com/python-poetry/poetry
   #   rev: 1.2.1
@@ -143,7 +144,7 @@ repos:
     hooks:
       - id: pylint
         name: pylint
-        entry: pylint lab01
+        entry: pylint lab01 lab02
         # entry: bash -c 'pylint ./path/package1/; pylint ./path/package2/'
         language: system
         types: [python]
@@ -161,7 +162,8 @@ repos:
       # https://github.com/python-poetry/poetry/issues/2765
       - id: poetry-lock
         name: poetry-lock
-        entry: bash -c 'poetry lock && python add_markers.py'
+        # entry: bash -c 'poetry lock && python add_markers.py'
+        entry: bash -c 'poetry lock'
         language: system
         always_run: true
         pass_filenames: false

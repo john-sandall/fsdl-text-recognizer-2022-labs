@@ -85,10 +85,23 @@ pyenv shell $(cat .python-version)
 mkvirtualenv -p python$(cat .python-version) $(cat .venv)
 python -V  # check this is the correct version of Python
 python -m pip install --upgrade pip
+
+# Install brewed dependencies (macOS only)
+brew install protobuf
 ```
 
 
 ## 4. Install Python requirements into the virtual environment using [Poetry](https://python-poetry.org/docs/)
+
+Poetry doesn't cache downloaded wheels, which means any Poetry step (including `poetry lock`,
+`poetry update` and pre-commit) redownloads the same wheel each time. We therefore download the
+relevant wheels on MacOS and install from local. Even on a fast connection, this reduces `poetry
+lock` from 60s -> 15s.
+
+```sh
+wget https://download.pytorch.org/whl/cu116/torch-1.12.1%2Bcu116-cp310-cp310-linux_x86_64.whl -P ./wheels/
+wget https://download.pytorch.org/whl/cu116/torchvision-0.13.1%2Bcu116-cp310-cp310-linux_x86_64.whl -P ./wheels/
+```
 
 Install Poetry onto your system by following the instructions here: [https://python-poetry.org/docs/]
 

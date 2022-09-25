@@ -9,11 +9,7 @@ import torch
 import torchvision
 from torch import nn
 
-from .transformer_util import (
-    PositionalEncoding,
-    PositionalEncodingImage,
-    generate_square_subsequent_mask,
-)
+from .transformer_util import PositionalEncoding, PositionalEncodingImage, generate_square_subsequent_mask
 
 TF_DIM = 256
 TF_FC_DIM = 1024
@@ -112,17 +108,12 @@ class ResnetTransformer(nn.Module):
             output_tokens[:, Sy] = output[-1]  # Set the last output token
 
             # Early stopping of prediction loop to speed up prediction
-            if (
-                (output_tokens[:, Sy] == self.end_token)
-                | (output_tokens[:, Sy] == self.padding_token)
-            ).all():
+            if ((output_tokens[:, Sy] == self.end_token) | (output_tokens[:, Sy] == self.padding_token)).all():
                 break
 
         # Set all tokens after end or padding token to be padding
         for Sy in range(1, S):
-            ind = (output_tokens[:, Sy - 1] == self.end_token) | (
-                output_tokens[:, Sy - 1] == self.padding_token
-            )
+            ind = (output_tokens[:, Sy - 1] == self.end_token) | (output_tokens[:, Sy - 1] == self.padding_token)
             output_tokens[ind, Sy] = self.padding_token
 
         return output_tokens  # (B, Sy)

@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import zipfile
 from pathlib import Path
-from typing import Any, Dict, cast
+from typing import Any, cast
 
 import toml
 from boltons.cacheutils import cachedproperty
@@ -139,26 +139,17 @@ class IAM:
     @cachedproperty
     def line_strings_by_id(self):
         """A dict mapping an IAM form id to its list of line texts."""
-        return {
-            filename.stem: _get_line_strings_from_xml_file(filename)
-            for filename in self.xml_filenames
-        }
+        return {filename.stem: _get_line_strings_from_xml_file(filename) for filename in self.xml_filenames}
 
     @cachedproperty
     def line_regions_by_id(self):
         """A dict mapping an IAM form id to its list of line image crop regions."""
-        return {
-            filename.stem: _get_line_regions_from_xml_file(filename)
-            for filename in self.xml_filenames
-        }
+        return {filename.stem: _get_line_regions_from_xml_file(filename) for filename in self.xml_filenames}
 
     @cachedproperty
     def paragraph_string_by_id(self):
         """A dict mapping an IAM form id to its paragraph text."""
-        return {
-            id: NEW_LINE_TOKEN.join(line_strings)
-            for id, line_strings in self.line_strings_by_id.items()
-        }
+        return {id: NEW_LINE_TOKEN.join(line_strings) for id, line_strings in self.line_strings_by_id.items()}
 
     @cachedproperty
     def paragraph_region_by_id(self):
@@ -207,8 +198,7 @@ def _get_line_regions_from_xml_file(filename: str) -> list[dict[str, int]]:
     """Get the line region dict for each line."""
     xml_line_elements = _get_line_elements_from_xml_file(filename)
     line_regions = [
-        cast(Dict[str, int], _get_region_from_xml_element(xml_elem=el, xml_path="word/cmp"))
-        for el in xml_line_elements
+        cast(dict[str, int], _get_region_from_xml_element(xml_elem=el, xml_path="word/cmp")) for el in xml_line_elements
     ]
     assert any(region is not None for region in line_regions), "Line regions cannot be None"
 
@@ -255,10 +245,8 @@ def _get_region_from_xml_element(xml_elem: Any, xml_path: str) -> dict[str, int]
     return {
         "x1": min(int(el.attrib["x"]) for el in unit_elements) // metadata.DOWNSAMPLE_FACTOR,
         "y1": min(int(el.attrib["y"]) for el in unit_elements) // metadata.DOWNSAMPLE_FACTOR,
-        "x2": max(int(el.attrib["x"]) + int(el.attrib["width"]) for el in unit_elements)
-        // metadata.DOWNSAMPLE_FACTOR,
-        "y2": max(int(el.attrib["y"]) + int(el.attrib["height"]) for el in unit_elements)
-        // metadata.DOWNSAMPLE_FACTOR,
+        "x2": max(int(el.attrib["x"]) + int(el.attrib["width"]) for el in unit_elements) // metadata.DOWNSAMPLE_FACTOR,
+        "y2": max(int(el.attrib["y"]) + int(el.attrib["height"]) for el in unit_elements) // metadata.DOWNSAMPLE_FACTOR,
     }
 
 
