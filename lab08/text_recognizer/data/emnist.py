@@ -5,19 +5,15 @@ import json
 import os
 import shutil
 import zipfile
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 import h5py
 import numpy as np
 import toml
 
 import text_recognizer.metadata.emnist as metadata
-from text_recognizer.data.base_data_module import (
-    BaseDataModule,
-    _download_raw_dataset,
-    load_and_print_info,
-)
+from text_recognizer.data.base_data_module import BaseDataModule, _download_raw_dataset, load_and_print_info
 from text_recognizer.data.util import BaseDataset, split_dataset
 from text_recognizer.stems.image import ImageStem
 from text_recognizer.util import temporary_working_directory

@@ -26,9 +26,7 @@ BEST_CHECKPOINT_ALIAS = "best"
 MODEL_CHECKPOINT_PATH = "model.ckpt"
 LOG_DIR = Path("training") / "logs"
 
-STAGED_MODEL_TYPE = (
-    "prod-ready"  # we can choose the name of this type, and ideally it's different from checkpoints
-)
+STAGED_MODEL_TYPE = "prod-ready"  # we can choose the name of this type, and ideally it's different from checkpoints
 STAGED_MODEL_FILENAME = "model.pt"  # standard nomenclature; pytorch_model.bin is also used
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -136,9 +134,7 @@ def print_info(artifact, run=None):
 
     full_artifact_name = f"{artifact.entity}/{artifact.project}/{artifact.name}"
     print(f"Using artifact {full_artifact_name}")
-    artifact_url_prefix = (
-        f"https://wandb.ai/{artifact.entity}/{artifact.project}/artifacts/{artifact.type}"
-    )
+    artifact_url_prefix = f"https://wandb.ai/{artifact.entity}/{artifact.project}/artifacts/{artifact.type}"
     artifact_url_suffix = f"{artifact.name.replace(':', '/')}"
     print(f"View at URL: {artifact_url_prefix}/{artifact_url_suffix}")
 

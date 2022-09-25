@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import argparse
 import os
+from collections.abc import Collection
 from pathlib import Path
-from typing import Collection
 
 import pytorch_lightning as pl
 import torch

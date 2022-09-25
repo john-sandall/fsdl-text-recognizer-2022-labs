@@ -152,9 +152,7 @@ class LineCNNTransformer(nn.Module):
 
         # Set all tokens after end token to be padding
         for Sy in range(1, S):
-            ind = (output_tokens[:, Sy - 1] == self.end_token) | (
-                output_tokens[:, Sy - 1] == self.padding_token
-            )
+            ind = (output_tokens[:, Sy - 1] == self.end_token) | (output_tokens[:, Sy - 1] == self.padding_token)
             output_tokens[ind, Sy] = self.padding_token
 
         return output_tokens  # (B, Sy)

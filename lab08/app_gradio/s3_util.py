@@ -18,9 +18,7 @@ def get_or_create_bucket(name):
         name, response = _create_bucket(name)
     except botocore.exceptions.ClientError as err:
         # error handling from https://github.com/boto/boto3/issues/1195#issuecomment-495842252
-        status = err.response["ResponseMetadata"][
-            "HTTPStatusCode"
-        ]  # status codes identify particular errors
+        status = err.response["ResponseMetadata"]["HTTPStatusCode"]  # status codes identify particular errors
 
         if status == 409:  # if the bucket exists already,
             pass  # we don't need to make it -- we presume we have the right permissions

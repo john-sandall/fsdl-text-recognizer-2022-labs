@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Callable, Sequence
 from pathlib import Path
-from typing import Callable, Sequence
 
 import numpy as np
 from PIL import Image
@@ -48,8 +48,7 @@ class IAMParagraphs(BaseDataModule):
         if (PROCESSED_DATA_DIRNAME / "_properties.json").exists():
             return
         rank_zero_info(
-            "IAMParagraphs.prepare_data: Cropping IAM paragraph regions "
-            "and saving them along with labels...",
+            "IAMParagraphs.prepare_data: Cropping IAM paragraph regions " "and saving them along with labels...",
         )
 
         iam = IAM()
@@ -129,11 +128,7 @@ def validate_input_and_output_dimensions(
     properties = get_dataset_properties()
 
     max_image_shape = properties["crop_shape"]["max"] / IMAGE_SCALE_FACTOR
-    assert (
-        input_dims is not None
-        and input_dims[1] >= max_image_shape[0]
-        and input_dims[2] >= max_image_shape[1]
-    )
+    assert input_dims is not None and input_dims[1] >= max_image_shape[0] and input_dims[2] >= max_image_shape[1]
 
     # Add 2 because of start and end tokens
     assert output_dims is not None and output_dims[0] >= properties["label_length"]["max"] + 2

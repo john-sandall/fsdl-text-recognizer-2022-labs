@@ -5,8 +5,8 @@ import argparse
 import json
 import logging
 import os
+from collections.abc import Callable
 from pathlib import Path
-from typing import Callable
 
 import gradio as gr
 import requests

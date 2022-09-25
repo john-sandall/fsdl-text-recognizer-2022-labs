@@ -11,12 +11,7 @@ from pytorch_lightning.utilities.rank_zero import rank_zero_info, rank_zero_only
 
 from text_recognizer import callbacks as cb
 from text_recognizer import lit_models
-from training.util import (
-    DATA_CLASS_MODULE,
-    MODEL_CLASS_MODULE,
-    import_class,
-    setup_data_and_model_from_args,
-)
+from training.util import DATA_CLASS_MODULE, MODEL_CLASS_MODULE, import_class, setup_data_and_model_from_args
 
 # In order to ensure reproducible experiments, we must set random seeds.
 np.random.seed(42)
@@ -38,19 +33,13 @@ def _setup_parser():
         "--wandb",
         action="store_true",
         default=False,
-        help=(
-            "If passed, logs experiment results to Weights & Biases. "
-            "Otherwise logs only to local Tensorboard."
-        ),
+        help=("If passed, logs experiment results to Weights & Biases. " "Otherwise logs only to local Tensorboard."),
     )
     parser.add_argument(
         "--profile",
         action="store_true",
         default=False,
-        help=(
-            "If passed, uses the PyTorch Profiler to track computation, "
-            "exported as a Chrome-style trace."
-        ),
+        help=("If passed, uses the PyTorch Profiler to track computation, " "exported as a Chrome-style trace."),
     )
     parser.add_argument(
         "--data_class",
@@ -75,8 +64,7 @@ def _setup_parser():
         type=int,
         default=0,
         help=(
-            "If non-zero, applies early stopping, with the provided value as "
-            "the 'patience' argument. Default is 0."
+            "If non-zero, applies early stopping, with the provided value as " "the 'patience' argument. Default is 0."
         ),
     )
 

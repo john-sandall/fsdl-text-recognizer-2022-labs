@@ -11,8 +11,8 @@ Example usage as a script:
 from __future__ import annotations
 
 import argparse
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 import torch
 from PIL import Image

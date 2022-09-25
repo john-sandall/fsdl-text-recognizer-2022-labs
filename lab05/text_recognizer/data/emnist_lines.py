@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import argparse
 from collections import defaultdict
-from typing import Sequence
+from collections.abc import Sequence
 
 import h5py
 import numpy as np
@@ -67,19 +67,13 @@ class EMNISTLines(BaseDataModule):
             "--min_overlap",
             type=float,
             default=DEFAULT_MIN_OVERLAP,
-            help=(
-                "Min overlap between characters in a line, between 0 and 1. "
-                f"Default is {DEFAULT_MIN_OVERLAP}"
-            ),
+            help=("Min overlap between characters in a line, between 0 and 1. " f"Default is {DEFAULT_MIN_OVERLAP}"),
         )
         parser.add_argument(
             "--max_overlap",
             type=float,
             default=DEFAULT_MAX_OVERLAP,
-            help=(
-                "Max overlap between characters in a line, between 0 and 1. "
-                f"Default is {DEFAULT_MAX_OVERLAP}"
-            ),
+            help=("Max overlap between characters in a line, between 0 and 1. " f"Default is {DEFAULT_MAX_OVERLAP}"),
         )
         parser.add_argument("--with_start_end_tokens", action="store_true", default=False)
         return parser

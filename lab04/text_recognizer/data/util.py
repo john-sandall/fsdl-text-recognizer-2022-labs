@@ -1,7 +1,8 @@
 """Base Dataset class."""
 from __future__ import annotations
 
-from typing import Any, Callable, Sequence, Union
+from collections.abc import Callable, Sequence
+from typing import Any, Union
 
 import torch
 from PIL import Image

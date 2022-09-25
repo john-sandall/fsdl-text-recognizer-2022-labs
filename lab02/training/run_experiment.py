@@ -10,12 +10,7 @@ import torch
 from pytorch_lightning.utilities.rank_zero import rank_zero_info, rank_zero_only
 
 from text_recognizer import lit_models
-from training.util import (
-    DATA_CLASS_MODULE,
-    MODEL_CLASS_MODULE,
-    import_class,
-    setup_data_and_model_from_args,
-)
+from training.util import DATA_CLASS_MODULE, MODEL_CLASS_MODULE, import_class, setup_data_and_model_from_args
 
 # In order to ensure reproducible experiments, we must set random seeds.
 np.random.seed(42)
@@ -55,10 +50,7 @@ def _setup_parser():
         "--stop_early",
         type=int,
         default=0,
-        help=(
-            "If non-zero, applies early stopping, "
-            "with the provided value as the 'patience' argument."
-        )
+        help=("If non-zero, applies early stopping, " "with the provided value as the 'patience' argument.")
         + " Default is 0.",
     )
 
